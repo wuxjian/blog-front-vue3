@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class="container vh-100 bg-white">
+    <router-view/>
+  </div>
 </template>
 
 <script lang="ts">
