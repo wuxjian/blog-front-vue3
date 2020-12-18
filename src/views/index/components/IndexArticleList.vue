@@ -3,7 +3,7 @@
     <img src="@/assets/cover.png" alt="">
     <div class="d-flex flex-column flex-fill ps-3">
       <div class="article-header">并发的Web爬虫</div>
-      <div class="article-summary flex-fill">我们做了一个简单的web爬虫，用bfs(广度优先)算法来抓取整个网站。在本节中，我们会让这个爬虫并行化，这样每一个彼此独立的抓取命令可以并行进行IO，最大化利用网络资源。crawl函数和gopl.io/ch5/findlinks3中的是一样的</div>
+      <div class="article-summary flex-fill overflow-hidden">我们做了一个简单的web爬虫我们做我们做了一个简单的web爬虫我们做了一个简单的web爬虫我们做了一个简单的web爬虫了一个简单的web爬虫我们做了一个简单的web爬虫我们做了一个简单的web爬虫</div>
       <div class="mb-2 divider"></div>
       <div class="article-other">2020-12-08 10:57:32</div>
     </div>
@@ -20,7 +20,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .article {
-  height: 144px;
+  height: 124px;
 }
 .container {
   img {
