@@ -1,11 +1,11 @@
 <template>
-  <div class="container p-2 mb-2 border-bottom d-flex article">
-    <img src="@/assets/cover.png" alt="">
+  <div class="container p-3 d-flex article">
+    <img class="rounded-1" src="@/assets/cover.png" alt="">
     <div class="d-flex flex-column flex-fill ps-3">
       <div class="article-header">并发的Web爬虫</div>
       <div class="article-summary flex-fill overflow-hidden">我们做了一个简单的web爬虫我们做我们做了一个简单的web爬虫我们做了一个简单的web爬虫我们做了一个简单的web爬虫了一个简单的web爬虫我们做了一个简单的web爬虫我们做了一个简单的web爬虫</div>
-      <div class="mb-2 divider"></div>
-      <div class="article-other">2020-12-08 10:57:32</div>
+      <div class="divider py-1"></div>
+      <div class="article-other pb-0">2020-12-08 10:57:32</div>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .article {
-  height: 124px;
+  border-bottom: 1px solid #eee;
+  height: 142px;
 }
 .container {
   img {
@@ -29,7 +30,7 @@ export default defineComponent({
   }
 }
 .article-header {
-  font-size: 22px;
+  font-size: 24px;
   font-family: "Source Sans Pro","Hiragino Sans GB","Microsoft Yahei",SimSun,Helvetica,Arial,Sans-serif,monospace;
 }
 .article-summary {
