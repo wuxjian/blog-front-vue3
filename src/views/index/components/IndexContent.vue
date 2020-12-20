@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-0  bg-white">
+  <div class="container px-0 bg-white" style="margin-top: 80px">
     <router-view/>
   </div>
 </template>
