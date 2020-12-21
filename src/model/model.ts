@@ -1,3 +1,5 @@
+export const title = '建指所向的个人博客'
+
 export class ListQuery {
     constructor(public currentPage = 1, public pageSize = 10) {
     }

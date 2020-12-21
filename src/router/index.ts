@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import {title} from "@/model/model";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,12 +10,18 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'IndexArticleList',
-        component: () => import('@/views/index/components/IndexArticleList.vue')
+        component: () => import('@/views/index/components/IndexArticleList.vue'),
+        meta: {
+          title: '首页'
+        }
       },
       {
         path: 'page/:page',
         name: 'IndexPage',
-        component: () => import('@/views/index/components/IndexArticleList.vue')
+        component: () => import('@/views/index/components/IndexArticleList.vue'),
+        meta: {
+          title: '首页'
+        }
       },
       {
         path: 'article/:id',
@@ -34,6 +41,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta['title']) {
+    document.title = to.meta['title'] + ' - ' + title
+  }
+  next()
 })
 
 export default router

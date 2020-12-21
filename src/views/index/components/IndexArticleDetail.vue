@@ -9,7 +9,7 @@
 import {defineComponent, onMounted, ref} from 'vue'
 import {useRoute} from 'vue-router'
 import {fetchClientArticle} from "@/api/article";
-import {Article} from "@/model/model";
+import {Article, title} from "@/model/model";
 
 
 export default defineComponent({
@@ -22,6 +22,7 @@ export default defineComponent({
     onMounted(() => {
       fetchClientArticle(id).then(res => {
         article.value = res.data as Article
+        document.title = article.value.title + ' - ' + title
       })
     })
     return {
