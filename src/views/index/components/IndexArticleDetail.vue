@@ -18,6 +18,7 @@ export default defineComponent({
     const route = useRoute()
     const id = +route.params['id']
     const article = ref<Article>({})
+
     onMounted(() => {
       fetchClientArticle(id).then(res => {
         article.value = res.data as Article
@@ -32,7 +33,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "~highlight.js/styles/monokai-sublime.css";
-::v-deep pre{
+:deep pre{
   font-size: 14px;
   padding: 1rem;
   max-height: 35rem;

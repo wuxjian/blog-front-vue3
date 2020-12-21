@@ -48,7 +48,6 @@ import {ListQuery, Article, Page} from '@/model/model'
 export default defineComponent({
   name: 'IndexArticleList',
   setup() {
-    debugger
     const listQuery = new ListQuery()
     const list = ref<Array<Article>>([])
     const router = useRouter()
@@ -57,6 +56,7 @@ export default defineComponent({
     if (!currentPage) {
       currentPage = 1
     }
+    listQuery.currentPage = currentPage
 
     // 分页对象
     const page = reactive<Page>({
@@ -86,23 +86,21 @@ export default defineComponent({
       if (p === page.currentPage) {
         return
       }
-      // listQuery.currentPage = p
-      //
-      // fetchData()
       if (p === 1) {
         router.push('/')
       } else {
-        router.push(`/p/${p}`)
+        router.push(`/page/${p}`)
       }
     }
-    watch(router.currentRoute, () => {
-      console.log("路由发生了变化");
+    watch(router.currentRoute, (to, from) => {
       currentPage = +route.params['page']
       if (!currentPage) {
         currentPage = 1
       }
       listQuery.currentPage = currentPage
-      fetchData()
+      if ((from.path.startsWith('/page') || from.path === '/') && !to.path.startsWith('/article')) {
+        fetchData()
+      }
     });
     return {
       list,
