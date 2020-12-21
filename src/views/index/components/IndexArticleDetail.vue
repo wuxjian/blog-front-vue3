@@ -1,6 +1,6 @@
 <template>
   <div class="container p-3">
-    <h2>{{article.title}}</h2>
+    <h2 class="text-center mb-4">{{article.title}}</h2>
     <div v-html="article.content"/>
   </div>
 </template>

@@ -1,4 +1,6 @@
 import axios from 'axios'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getAuthHeader } from './encrypt'
 
 // create an axios instance
@@ -10,6 +12,8 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
+
+    NProgress.start();
     // do something before request is sent
     config.headers['X-Auth'] = getAuthHeader()
     return config
@@ -34,6 +38,7 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    NProgress.done()
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
@@ -49,6 +54,7 @@ service.interceptors.response.use(
     }
   },
   error => {
+    NProgress.done()
     console.log('err' + error) // for debug
     alert('出错了')
     return Promise.reject(error)
