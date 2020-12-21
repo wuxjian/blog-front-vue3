@@ -1,18 +1,18 @@
 <template>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <router-link to="/" class="navbar-brand">
         <img src="@/assets/logo.png" alt="" height="34">
         <span class="slogan text-primary">何以解忧，惟有暴富！</span>
-      </a>
+      </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
-          <li v-for="(item, index) in navItemList" :key="index" class="nav-item px-1" @click.prevent="handleItemClick(item)">
-            <a :class="currentKey === item.key ? 'active' : ''" class="nav-link" aria-current="page" href="#">
+          <li v-for="(item, index) in navItemList" :key="index" class="nav-item px-1 pointer" @click.prevent="handleItemClick(item)">
+            <a :class="currentKey === item.key ? 'active' : ''" class="nav-link" aria-current="page">
               {{item.name}}
             </a>
           </li>
@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import {useRouter} from 'vue-router'
 interface NavItem {
   key: string;
   name: string;
@@ -50,10 +51,13 @@ const navItemList: Array<NavItem> = [
 export default defineComponent({
   name: 'IndexHeader',
   setup() {
-
+    const router = useRouter()
     const currentKey = ref('home')
     const handleItemClick = (item: NavItem) => {
       currentKey.value = item.key
+      if (item.key === 'home') {
+        router.push('/')
+      }
     }
 
     return {
