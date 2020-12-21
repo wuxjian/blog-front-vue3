@@ -1,6 +1,6 @@
 <template>
   <div v-for="item in list" :key="item.id" class="container p-3 d-flex article">
-    <img class="rounded-1 pointer" @click="gotoDetail(item.id)" :src="item.cover ? item.cover : require('../../../assets/cover.png')" alt="">
+    <img class="rounded-1 pointer d-sm-inline-block d-none" @click="gotoDetail(item.id)" :src="item.cover ? item.cover : require('../../../assets/cover.png')" alt="">
     <div class="d-flex flex-column flex-fill ps-3">
       <div class="article-title overflow-hidden text-nowrap pointer" @click="gotoDetail(item.id)">{{item.title}}</div>
       <div class="article-summary flex-grow-1 overflow-hidden">{{item.summary}}</div>
