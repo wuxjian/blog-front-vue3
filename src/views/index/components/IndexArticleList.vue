@@ -1,42 +1,115 @@
 <template>
   <div v-for="item in list" :key="item.id" class="container p-3 d-flex article">
-    <img class="rounded-1 pointer" :src="item.cover ? item.cover : require('../../../assets/cover.png')" alt="">
+    <img class="rounded-1 pointer" @click="gotoDetail(item.id)" :src="item.cover ? item.cover : require('../../../assets/cover.png')" alt="">
     <div class="d-flex flex-column flex-fill ps-3">
-      <div class="article-title overflow-hidden text-nowrap pointer">{{item.title}}</div>
+      <div class="article-title overflow-hidden text-nowrap pointer" @click="gotoDetail(item.id)">{{item.title}}</div>
       <div class="article-summary flex-grow-1 overflow-hidden">{{item.summary}}</div>
       <div class="divider py-1"></div>
       <div class="article-other pb-0">{{item.created_at.replace('T', ' ').substring(0, 19) }}</div>
     </div>
   </div>
+  <nav v-if="page.totalPage > 1" class="pt-3 pb-1 pe-1" aria-label="Page navigation">
+    <ul class="pagination justify-content-end">
+      <li
+          :class="1 === page.currentPage ? 'disabled' : ''"
+          @click.prevent="handlePageChange(page.currentPage - 1)"
+          class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li v-for="(i, index) of page.totalPage"
+          :key="index"
+          :class="i === page.currentPage ? 'active' : ''"
+          @click.prevent="handlePageChange(i)"
+          class="page-item">
+        <a class="page-link" href="#">{{i}}</a>
+      </li>
+      <li
+          :class="page.totalPage === page.currentPage ? 'disabled' : ''"
+          @click.prevent="handlePageChange(page.currentPage + 1)"
+          class="page-item"
+      >
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue';
-import {fetchClientList} from '@/api/article.js';
-import {ListQuery} from '@/model/model'
+import {defineComponent, onMounted, ref, reactive, watch} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import {fetchClientList} from '@/api/article.js'
+import {ListQuery, Article, Page} from '@/model/model'
 
-interface Article {
-  id: number;
-  cover: string;
-  title: string;
-  summary: string;
-  created_at: string;
-}
 
 export default defineComponent({
   name: 'IndexArticleList',
   setup() {
+    debugger
     const listQuery = new ListQuery()
     const list = ref<Array<Article>>([])
-    onMounted(() => {
+    const router = useRouter()
+    const route = useRoute()
+    let currentPage = +route.params['page']
+    if (!currentPage) {
+      currentPage = 1
+    }
+
+    // 分页对象
+    const page = reactive<Page>({
+      currentPage: currentPage,
+      totalPage: 1
+    })
+
+    const fetchData = () => {
       fetchClientList(listQuery).then(res => {
         list.value = res.data.list as Array<Article>
-        console.log(res)
+        page.totalPage = res.data.totalPage
+        page.currentPage = res.data.currentPage
       })
+    }
+
+    onMounted(() => {
+      fetchData()
     })
+
+
+    const gotoDetail = (id: number) => {
+      router.push(`/article/${id}`)
+    }
+
+    // 点击分页事件
+    const handlePageChange = (p: number) => {
+      if (p === page.currentPage) {
+        return
+      }
+      // listQuery.currentPage = p
+      //
+      // fetchData()
+      if (p === 1) {
+        router.push('/')
+      } else {
+        router.push(`/p/${p}`)
+      }
+    }
+    watch(router.currentRoute, () => {
+      console.log("路由发生了变化");
+      currentPage = +route.params['page']
+      if (!currentPage) {
+        currentPage = 1
+      }
+      listQuery.currentPage = currentPage
+      fetchData()
+    });
     return {
       list,
-      listQuery
+      listQuery,
+      gotoDetail,
+      page,
+      handlePageChange
     }
   }
 });
@@ -51,11 +124,13 @@ export default defineComponent({
 .article:hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
-.container {
-  img {
-    width: 150px;
-    height: 110px;
-  }
+.article img{
+  width: 150px;
+  height: 110px;
+}
+.article img:hover {
+  transition:all .3s;
+  transform:scale(1.08);
 }
 .article-title {
   display: inline-block;
@@ -77,7 +152,5 @@ export default defineComponent({
 }
 .divider {
   border-top: 1px solid #eee;
-}
-.article {
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <IndexHeader/>
-  <IndexContent/>
+  <IndexContent />
   <IndexBottom/>
 </template>
 
