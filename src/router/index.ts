@@ -29,20 +29,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/index/ArticleDetail.vue')
       },
 
-    ]
-  },
-
-  {
-    path: '/tool',
-    name: 'tool',
-    component: () => import('@/views/layout/Layout.vue'),
-    meta: {
-      title: '常用工具'
-    },
-    children: [
       {
-        path: '',
-        name: "tool-index",
+        path: '/tool',
+        name: 'tool',
         component: () => import('@/views/tool/index.vue'),
         meta: {
           title: '常用工具'
@@ -50,7 +39,6 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
-
   {
     path: '/404',
     name: '404',

@@ -11,8 +11,11 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
-          <li v-for="(item, index) in navItemList" :key="index" class="nav-item px-1 pointer" @click.prevent="handleItemClick(item)">
-            <a :class="currentKey === item.key ? 'active' : ''" class="nav-link" aria-current="page">
+          <li v-for="(item, index) in navItemList"
+              :key="index" class="nav-item px-1 pointer" >
+            <a :class="currentKey === item.key ? 'active' : ''"
+                @click.prevent="handleItemClick(item)"
+                class="nav-link" aria-current="page">
               {{item.name}}
             </a>
           </li>
