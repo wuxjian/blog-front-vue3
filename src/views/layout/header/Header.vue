@@ -49,7 +49,7 @@ const navItemList: Array<NavItem> = [
 ]
 
 export default defineComponent({
-  name: 'IndexHeader',
+  name: 'Header',
   setup() {
     const router = useRouter()
     const currentKey = ref('home')
@@ -57,6 +57,8 @@ export default defineComponent({
       currentKey.value = item.key
       if (item.key === 'home') {
         router.push('/')
+      } else if (item.key === 'tool') {
+        router.push('/tool')
       }
     }
 

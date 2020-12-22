@@ -6,7 +6,7 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'IndexBottom',
+  name: 'Bottom',
   setup() {
     const copyright = `Copyright © ${new Date().getFullYear()} by 建指所向`
     return {

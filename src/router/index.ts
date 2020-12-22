@@ -4,32 +4,53 @@ import {title} from "@/model/model";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'IndexLayout',
-    component: () => import('@/views/index/IndexLayout.vue'),
+    name: 'Layout',
+    component: () => import('@/views/layout/Layout.vue'),
     children: [
       {
         path: '',
-        name: 'IndexArticleList',
-        component: () => import('@/views/index/components/IndexArticleList.vue'),
+        name: 'ArticleList',
+        component: () => import('@/views/index/ArticleList.vue'),
         meta: {
           title: '首页'
         }
       },
       {
         path: 'page/:page',
-        name: 'IndexPage',
-        component: () => import('@/views/index/components/IndexArticleList.vue'),
+        name: 'Page',
+        component: () => import('@/views/index/ArticleList.vue'),
         meta: {
           title: '首页'
         }
       },
       {
         path: 'article/:id',
-        name: 'IndexArticleDetail',
-        component: () => import('@/views/index/components/IndexArticleDetail.vue')
+        name: 'ArticleDetail',
+        component: () => import('@/views/index/ArticleDetail.vue')
+      },
+
+    ]
+  },
+
+  {
+    path: '/tool',
+    name: 'tool',
+    component: () => import('@/views/layout/Layout.vue'),
+    meta: {
+      title: '常用工具'
+    },
+    children: [
+      {
+        path: '',
+        name: "tool-index",
+        component: () => import('@/views/tool/index.vue'),
+        meta: {
+          title: '常用工具'
+        }
       },
     ]
   },
+
   {
     path: '/404',
     name: '404',
