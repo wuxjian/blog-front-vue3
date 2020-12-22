@@ -9,3 +9,12 @@
 .pointer {
   cursor: pointer;
 }
+
+.ajs-message.ajs-visible {
+  color: #fff !important;
+  background-color: #5c636a !important;
+  border-radius: 6px !important;
+}
+.alertify-notifier.ajs-top {
+  top: 60px !important;
+}

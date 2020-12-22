@@ -1,6 +1,13 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import alertify from 'alertifyjs'
+import 'alertifyjs/build/css/alertify.min.css'
+import 'alertifyjs/build/css/themes/bootstrap.min.css'
+
+// 位置
+alertify.set('notifier','position', 'top-center');
+
 import { getAuthHeader } from './encrypt'
 
 // create an axios instance
@@ -43,11 +50,9 @@ service.interceptors.response.use(
 
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
-      alert('出错了')
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      // if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-      // }
+      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+        alertify.message('身份已过期~', 3);
+      }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
@@ -55,8 +60,7 @@ service.interceptors.response.use(
   },
   error => {
     NProgress.done()
-    console.log('err' + error) // for debug
-    alert('出错了')
+    alertify.message('网络开了小差~', 3);
     return Promise.reject(error)
   }
 )
