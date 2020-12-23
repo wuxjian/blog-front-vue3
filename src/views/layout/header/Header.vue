@@ -45,10 +45,10 @@ const navItemList: Array<NavItem> = [
     key: 'manage',
     name: '管理',
   },
-  {
-    key: 'about',
-    name: '关于',
-  },
+  // {
+  //   key: 'about',
+  //   name: '关于',
+  // },
 ]
 
 export default defineComponent({
@@ -56,6 +56,13 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const currentKey = ref('home')
+
+    const currentPath = router.currentRoute.value.path
+    if (currentPath.indexOf('tool') > -1) {
+      currentKey.value = 'tool'
+    }
+
+
     const handleItemClick = (item: NavItem) => {
       currentKey.value = item.key
       if (item.key === 'home') {
@@ -63,7 +70,7 @@ export default defineComponent({
       } else if (item.key === 'tool') {
         router.push('/tool')
       }
-    }
+    };
 
     return {
       currentKey,

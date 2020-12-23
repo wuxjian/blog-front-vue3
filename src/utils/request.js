@@ -1,12 +1,8 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import alertify from 'alertifyjs'
-import 'alertifyjs/build/css/alertify.min.css'
-import 'alertifyjs/build/css/themes/bootstrap.min.css'
+import alertify from '@/utils/alert'
 
-// 位置
-alertify.set('notifier','position', 'top-center');
 
 import { getAuthHeader } from './encrypt'
 

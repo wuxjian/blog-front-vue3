@@ -98,7 +98,7 @@ export default defineComponent({
         currentPage = 1
       }
       listQuery.currentPage = currentPage
-      if ((from.path.startsWith('/page') || from.path === '/') && !to.path.startsWith('/article')) {
+      if ( (from.path.startsWith('/page') || from.path === '/') && (to.path.startsWith('/page') || to.path === '/') ) {
         fetchData()
       }
     });

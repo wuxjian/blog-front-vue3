@@ -4,7 +4,6 @@ import {title} from "@/model/model";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Layout',
     component: () => import('@/views/layout/Layout.vue'),
     children: [
       {
@@ -28,14 +27,38 @@ const routes: Array<RouteRecordRaw> = [
         name: 'ArticleDetail',
         component: () => import('@/views/index/ArticleDetail.vue')
       },
-
+    ]
+  },
+  {
+    path: '/tool',
+    component: () => import('@/views/layout/Layout.vue'),
+    children: [
       {
-        path: '/tool',
+        path: '',
         name: 'tool',
-        component: () => import('@/views/tool/index.vue'),
+        component: () => import('@/views/tool/Tool.vue'),
+        redirect: '/tool/json',
         meta: {
           title: '常用工具'
-        }
+        },
+        children: [
+          {
+            path: 'json',
+            name: 'json',
+            component: () => import('@/views/tool/json_format/JsonFormat.vue'),
+            meta: {
+              title: 'JSON格式化'
+            }
+          },
+          {
+            path: 'md5',
+            name: 'md5',
+            component: () => import('@/views/tool/md5/MD5.vue'),
+            meta: {
+              title: 'MD5'
+            }
+          },
+        ]
       },
     ]
   },
