@@ -64,7 +64,4 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.tool-wrap {
-  height: calc(100vh - 350px);
-}
 </style>
