@@ -2,7 +2,7 @@
   <div class="row gx-3 justify-content-around md5">
     <div class="col-md-6 d-flex flex-column align-items-end">
       <textarea v-model="originalVal" class="form-control no-resize" rows="15"></textarea>
-      <button @click="md5Func" class="btn btn-outline-primary my-2 w-25">MD5加密</button>
+      <button @click="md5Func" class="btn btn-primary my-2 w-50">MD5加密</button>
     </div>
     <div class="col-md-6">
       <table class="table table-hover table-striped table-bordered text-start">
