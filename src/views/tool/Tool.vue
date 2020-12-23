@@ -29,7 +29,7 @@
         </button>-->
       </div>
     </div>
-    <div class="mt-2">
+    <div class="mt-2 tool-wrap">
       <router-view></router-view>
     </div>
   </div>
@@ -64,4 +64,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.tool-wrap {
+  height: calc(100vh - 350px);
+}
 </style>
