@@ -27,6 +27,13 @@
             class="btn btn-outline-primary">
           URL Encoder
         </button>
+        <button
+            type="button"
+            @click="handleButtonClick('qrcode')"
+            :class="currentKey === 'qrcode' ? 'active' : ''"
+            class="btn btn-outline-primary">
+          二维码
+        </button>
       </div>
     </div>
     <div class="mt-2 tool-wrap">
@@ -47,13 +54,7 @@ export default defineComponent({
     const router = useRouter()
     const handleButtonClick = (name: string) => {
       currentKey.value = name
-      if (name === 'json') {
-        router.push('/tool/json')
-      } else if (name === 'md5') {
-        router.push('/tool/md5')
-      } else if (name === 'urlEncode') {
-        router.push('/tool/urlEncode')
-      }
+      router.push(`/tool/${name}`)
     }
 
     return {

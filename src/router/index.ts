@@ -66,6 +66,14 @@ const routes: Array<RouteRecordRaw> = [
               title: 'UrlEncode|UrlDecode'
             }
           },
+          {
+            path: 'qrcode',
+            name: 'qrcode',
+            component: () => import('@/views/tool/qrcode/Qrcode.vue'),
+            meta: {
+              title: '二维码'
+            }
+          },
         ]
       },
     ]
