@@ -47,7 +47,6 @@ export default defineComponent({
     const router = useRouter()
     const handleButtonClick = (name: string) => {
       currentKey.value = name
-      debugger
       if (name === 'json') {
         router.push('/tool/json')
       } else if (name === 'md5') {
