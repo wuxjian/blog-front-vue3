@@ -11,8 +11,9 @@ export default defineComponent({
     setTimeout(() => {
       document.body.removeChild(document.getElementById('loading') as Node)
       const app = document.getElementById('app') as HTMLElement
+      document.body.style.backgroundColor = '#E9EAED'
       app.style.display = 'block'
-    }, 200)
+    }, 500)
   }
 })
 </script>
