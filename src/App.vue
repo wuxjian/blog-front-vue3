@@ -8,7 +8,11 @@ import {defineComponent} from 'vue';
 export default defineComponent({
   name: 'App',
   setup() {
-    document.body.removeChild(document.getElementById('loading') as Node)
+    setTimeout(() => {
+      document.body.removeChild(document.getElementById('loading') as Node)
+      const app = document.getElementById('app') as HTMLElement
+      app.style.display = 'block'
+    }, 200)
   }
 })
 </script>
