@@ -58,6 +58,14 @@ const routes: Array<RouteRecordRaw> = [
               title: 'MD5'
             }
           },
+          {
+            path: 'urlEncode',
+            name: 'urlEncode',
+            component: () => import('@/views/tool/url_encode/UrlEncode.vue'),
+            meta: {
+              title: 'UrlEncode|UrlDecode'
+            }
+          },
         ]
       },
     ]
