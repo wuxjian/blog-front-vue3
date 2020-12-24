@@ -3,17 +3,19 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, onMounted} from 'vue';
 
 export default defineComponent({
   name: 'App',
   setup() {
-    setTimeout(() => {
-      document.body.removeChild(document.getElementById('loading') as Node)
-      const app = document.getElementById('app') as HTMLElement
-      document.body.style.backgroundColor = '#E9EAED'
-      app.style.display = 'block'
-    }, 500)
+    onMounted(() => {
+      setTimeout(() => {
+        document.body.removeChild(document.getElementById('loading') as Node)
+        const app = document.getElementById('app') as HTMLElement
+        document.body.style.backgroundColor = '#E9EAED'
+        app.style.display = 'block'
+      }, 500)
+    })
   }
 })
 </script>
