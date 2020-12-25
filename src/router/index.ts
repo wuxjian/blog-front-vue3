@@ -79,6 +79,21 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/views/admin/Admin.vue')
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/Login.vue'),
+    meta: {
+      title: '登录'
+    }
+  },
+
+  {
     path: '/404',
     name: '404',
     component: () => import('@/views/404/404.vue')
