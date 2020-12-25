@@ -58,10 +58,41 @@ const routes: Array<RouteRecordRaw> = [
               title: 'MD5'
             }
           },
+          {
+            path: 'urlEncode',
+            name: 'urlEncode',
+            component: () => import('@/views/tool/url_encode/UrlEncode.vue'),
+            meta: {
+              title: 'UrlEncode|UrlDecode'
+            }
+          },
+          {
+            path: 'qrcode',
+            name: 'qrcode',
+            component: () => import('@/views/tool/qrcode/Qrcode.vue'),
+            meta: {
+              title: '二维码'
+            }
+          },
         ]
       },
     ]
   },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/views/admin/Admin.vue')
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/Login.vue'),
+    meta: {
+      title: '登录'
+    }
+  },
+
   {
     path: '/404',
     name: '404',

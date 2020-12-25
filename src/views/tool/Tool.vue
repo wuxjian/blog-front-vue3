@@ -20,13 +20,20 @@
             class="btn btn-outline-primary">
           MD5
         </button>
-<!--        <button
+        <button
             type="button"
-            @click="handleButtonClick('url')"
-            :class="currentKey === 'url' ? 'active' : ''"
+            @click="handleButtonClick('urlEncode')"
+            :class="currentKey === 'urlEncode' ? 'active' : ''"
             class="btn btn-outline-primary">
           URL Encoder
-        </button>-->
+        </button>
+        <button
+            type="button"
+            @click="handleButtonClick('qrcode')"
+            :class="currentKey === 'qrcode' ? 'active' : ''"
+            class="btn btn-outline-primary">
+          二维码
+        </button>
       </div>
     </div>
     <div class="mt-2 tool-wrap">
@@ -47,12 +54,7 @@ export default defineComponent({
     const router = useRouter()
     const handleButtonClick = (name: string) => {
       currentKey.value = name
-      debugger
-      if (name === 'json') {
-        router.push('/tool/json')
-      } else if (name === 'md5') {
-        router.push('/tool/md5')
-      }
+      router.push(`/tool/${name}`)
     }
 
     return {
