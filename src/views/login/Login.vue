@@ -5,25 +5,23 @@
         <div class="card fat">
           <div class="card-body">
             <h4 class="card-title">登录</h4>
-            <form method="POST" class="my-login-validation" novalidate="">
+            <form :class="{'was-validated': wasValidated}" method="POST" class="my-login-validation" novalidate="">
               <div class="form-group">
-                <label for="username">用户名</label>
-                <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
+                <input @blur="handleBlur" v-model="loginParam.username" type="text" class="form-control" placeholder="用户名" required autofocus>
                 <div class="invalid-feedback">
                   请输入用户名
                 </div>
               </div>
 
-              <div class="form-group mt-2">
-                <label for="password">密码</label>
-                <input id="password" type="password" class="form-control" name="password" required data-eye>
+              <div class="form-group mt-4">
+                <input @blur="handleBlur" v-model="loginParam.password" type="password" class="form-control" placeholder="密码" required data-eye>
                 <div class="invalid-feedback">
                   请输入用密码
                 </div>
               </div>
 
-              <div class="form-group mt-2">
-                <button type="submit" class="btn btn-primary w-100">
+              <div class="form-group mt-4">
+                <button @click.prevent="handleSubmit" type="submit" class="btn btn-primary w-100">
                   登录
                 </button>
               </div>
@@ -36,10 +34,46 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, reactive, ref} from 'vue';
+import {useRouter} from 'vue-router'
+import {login} from '@/api/user'
+import alertify from '@/utils/alert'
+import {setToken} from '@/utils/auth'
 
 export default defineComponent({
   name: 'Login',
+  setup() {
+
+    const router = useRouter()
+
+    const loginParam = reactive({
+      username: '',
+      password: ''
+    })
+    const wasValidated = ref(false)
+
+    const handleBlur = () => {
+      wasValidated.value = true
+    }
+
+    const handleSubmit = () => {
+      if (loginParam.username.trim() === '' || loginParam.password.trim() === '') {
+        return
+      }
+      login(loginParam).then(res => {
+        setToken(res.data)
+        router.push('/admin')
+      }).catch(e => {
+        alertify.error(e.message)
+      })
+    }
+    return {
+      loginParam,
+      wasValidated,
+      handleBlur,
+      handleSubmit
+    }
+  }
 });
 </script>
 

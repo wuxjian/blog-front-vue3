@@ -2,9 +2,9 @@ import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import alertify from '@/utils/alert'
-
-
+import {getToken, removeToken} from '@/utils/auth'
 import { getAuthHeader } from './encrypt'
+import {useRouter, useRoute} from 'vue-router'
 
 // create an axios instance
 const service = axios.create({
@@ -17,7 +17,10 @@ service.interceptors.request.use(
   config => {
 
     NProgress.start();
-    // do something before request is sent
+    const token = getToken()
+    if (token) {
+      config.headers['X-Token'] = getToken()
+    }
     config.headers['X-Auth'] = getAuthHeader()
     return config
   },
@@ -44,12 +47,17 @@ service.interceptors.response.use(
     NProgress.done()
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        alertify.message('身份已过期~', 3);
+      if (res.code === 502 || res.code === 503) {
+        removeToken()
+        const route = useRoute();
+        if (route.meta['loginValidate']) {
+          const router = useRouter();
+          router.push('/login')
+          return
+        }
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.msg || 'something is wrong'))
     } else {
       return res
     }

@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import {title} from "@/model/model";
+import {getToken} from '@/utils/auth'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -81,7 +82,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('@/views/admin/Admin.vue')
+    component: () => import('@/views/admin/Admin.vue'),
+    meta: {
+      loginValidate: true
+    }
   },
 
   {
@@ -109,6 +113,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta['title']) {
     document.title = to.meta['title'] + ' - ' + title
+  }
+  if (to.meta['loginValidate'] && !getToken()) {
+    router.push('/login')
   }
   next()
 })
