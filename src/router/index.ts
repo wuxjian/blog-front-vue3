@@ -84,7 +84,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'admin',
     component: () => import('@/views/admin/Admin.vue'),
     meta: {
-      loginValidate: true
+      loginValidate: false
     }
   },
 
