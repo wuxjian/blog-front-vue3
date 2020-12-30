@@ -85,7 +85,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/admin/Admin.vue'),
     meta: {
       loginValidate: false
-    }
+    },
+    children: [
+      {
+        path: '',
+        name: 'dashboard',
+        component: () => import('@/views/admin/dashboard/Dashboard.vue')
+      }
+    ]
   },
 
   {
