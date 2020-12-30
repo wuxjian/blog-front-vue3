@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="p-3">
+      <button class="btn btn-success" v-if="connected">已连接</button>
+      <button class="btn btn-danger" v-if="!connected">未连接</button>
+    </div>
     <div class="row px-2">
       <div class="col-sm-6 col-lg-4">
         <system-status ref="cpu" :unit="'%'"/>

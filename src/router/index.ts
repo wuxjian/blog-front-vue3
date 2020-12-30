@@ -90,7 +90,26 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'dashboard',
-        component: () => import('@/views/admin/dashboard/Dashboard.vue')
+        component: () => import('@/views/admin/dashboard/Dashboard.vue'),
+        meta: {
+          title: 'Dashboard'
+        }
+      },
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/admin/dashboard/Dashboard.vue'),
+        meta: {
+          title: 'Dashboard'
+        }
+      },
+      {
+        path: 'upgrade',
+        name: 'upgrade',
+        component: () => import('@/views/admin/upgrade/Upgrade.vue'),
+        meta: {
+          title: '升级'
+        }
       }
     ]
   },

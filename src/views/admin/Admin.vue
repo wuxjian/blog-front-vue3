@@ -1,5 +1,5 @@
 <template>
-  <header class="container-fluid shadow p-0">
+  <header class="container-fluid shadow-lg p-0">
     <a @click="toggleFunc" class="btn btn-default" href="#"><i class="fa fa-align-justify fa-2x" style="color: #eee"></i></a>
   </header>
 
@@ -9,11 +9,15 @@
       <transition enter-active-class="animate__fadeInTopLeft" leave-active-class="animate__backOutLeft">
         <nav v-if="toggle" id="sidebarMenu" class="bg-white p-0 shadow-lg">
           <ul class="list-group">
-            <li class="list-group-item ps-4 choose">
+            <li @click="handleMenuClick('dashboard')"
+                :class="currentMenu === 'dashboard' ? 'choose' : ''"
+                class="list-group-item ps-4">
               <i class="fa fa-dashboard me-3"></i>
               <span class=" d-sm-inline-block d-none">首页</span>
             </li>
-            <li class="list-group-item ps-4">
+            <li @click="handleMenuClick('upgrade')"
+                :class="currentMenu === 'upgrade' ? 'choose' : ''"
+                class="list-group-item ps-4">
               <i class="fa fa-arrow-circle-up me-3"></i>
               <span class=" d-sm-inline-block d-none">升级</span>
             </li>
@@ -45,20 +49,35 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import {useRouter} from 'vue-router'
 import 'animate.css/animate.min.css'
 
 export default defineComponent({
   name: 'Admin',
   setup() {
+    const router = useRouter()
+
     const toggle = ref(true)
+    const currentMenu = ref('dashboard')
 
     const toggleFunc = () => {
       toggle.value = !toggle.value
     }
 
+    const handleMenuClick = (menu: string) => {
+      if (menu === 'dashboard') {
+        router.push('/admin/dashboard')
+      } else if (menu === 'upgrade') {
+        router.push('/admin/upgrade')
+      }
+      currentMenu.value = menu
+    }
+
     return {
       toggle,
-      toggleFunc
+      currentMenu,
+      toggleFunc,
+      handleMenuClick
     }
   }
 });
@@ -75,6 +94,10 @@ header {
   height: calc(100vh - 60px);
   color: #444;
   width: 260px;
+}
+
+main {
+  min-height: calc(100vh - 60px);
 }
 @media screen and (max-width: 576px) {
   #sidebarMenu {
@@ -104,7 +127,7 @@ header {
   font-size: 16px
 }
 .content {
-  min-height: 80px;
   overflow: hidden;
+  height: 100%;
 }
 </style>
