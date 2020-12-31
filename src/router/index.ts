@@ -110,6 +110,14 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '升级'
         }
+      },
+      {
+        path: 'article/list',
+        name: 'AdminArticleList',
+        component: () => import('@/views/admin/article/ArticleList.vue'),
+        meta: {
+          title: '文章列表'
+        }
       }
     ]
   },

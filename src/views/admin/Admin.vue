@@ -13,25 +13,31 @@
                 :class="currentMenu === 'dashboard' ? 'choose' : ''"
                 class="list-group-item ps-4">
               <i class="fa fa-dashboard me-3"></i>
-              <span class=" d-sm-inline-block d-none">首页</span>
+              <span class="d-sm-inline-block d-none">首页</span>
             </li>
             <li @click="handleMenuClick('upgrade')"
                 :class="currentMenu === 'upgrade' ? 'choose' : ''"
                 class="list-group-item ps-4">
               <i class="fa fa-arrow-circle-up me-3"></i>
-              <span class=" d-sm-inline-block d-none">升级</span>
+              <span class="d-sm-inline-block d-none">升级</span>
             </li>
             <li class="list-group-item ps-4">
               <i class="fa fa-photo me-3"></i>
-              <span class=" d-sm-inline-block d-none">相册</span>
+              <span class="d-sm-inline-block d-none">相册</span>
             </li>
             <li class="list-group-item ps-4">
               <i class="fa fa-book me-3"></i>
-              <span class=" d-sm-inline-block d-none">文章</span>
+              <span class="d-sm-inline-block d-none">文章</span>
+            </li>
+            <li @click="handleMenuClick('article/list')"
+                :class="currentMenu === 'article/list' ? 'choose' : ''"
+                class="list-group-item ps-4">
+              <i class="fa fa-book me-3"></i>
+              <span class="d-sm-inline-block d-none">文章列表</span>
             </li>
             <li class="list-group-item ps-4">
               <i class="fa fa-file me-3"></i>
-              <span class=" d-sm-inline-block d-none">资源</span>
+              <span class="d-sm-inline-block d-none">资源</span>
             </li>
           </ul>
         </nav>
@@ -70,6 +76,8 @@ export default defineComponent({
       } else if (menu === 'upgrade') {
         router.push('/admin/upgrade')
       }
+      router.push(`/admin/${menu}`)
+
       currentMenu.value = menu
     }
 
