@@ -1,7 +1,7 @@
 <template>
   <div v-for="item in list" :key="item.id" class="container p-3 d-flex article">
     <img class="rounded-1 pointer d-sm-inline-block d-none" @click="gotoDetail(item.id)" :src="item.cover ? item.cover : require('../../assets/cover.png')" alt="">
-    <div class="d-flex flex-column flex-fill ps-3">
+    <div class="d-flex flex-column flex-fill ps-3 overflow-hidden">
       <div class="article-title overflow-hidden text-nowrap pointer" @click="gotoDetail(item.id)">{{item.title}}</div>
       <div class="article-summary flex-grow-1 overflow-hidden">{{item.summary}}</div>
       <div class="divider py-1"></div>
@@ -135,15 +135,20 @@ export default defineComponent({
   display: inline-block;
   font-size: 24px;
   font-family: "Source Sans Pro","Hiragino Sans GB","Microsoft Yahei",SimSun,Helvetica,Arial,Sans-serif,monospace;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
 }
 .article-title:hover {
   color: $main-color;
 }
 .article-summary {
   color: #a0a0a0;
-  font-size: 14px;
-  height: 45px;
+  font-size: 15px;
+  overflow: hidden;
+  height: 46px;
   font-family: "Source Sans Pro","Hiragino Sans GB","Microsoft Yahei",SimSun,Helvetica,Arial,Sans-serif,monospace;
+  padding: 3px 0;
 }
 .article-other {
   color: #a0a0a0;
